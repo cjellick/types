@@ -9,6 +9,8 @@ import (
 	authzv1 "github.com/rancher/types/apis/authorization.cattle.io/v1"
 	clusterv1 "github.com/rancher/types/apis/cluster.cattle.io/v1"
 	corev1 "github.com/rancher/types/apis/core/v1"
+	extv1beta1 "github.com/rancher/types/apis/extensions/v1beta1"
+	rbacv1 "github.com/rancher/types/apis/rbac/v1"
 	workloadv1 "github.com/rancher/types/apis/workload.cattle.io/v1"
 	"github.com/sirupsen/logrus"
 	"k8s.io/client-go/dynamic"
@@ -38,9 +40,11 @@ type WorkloadContext struct {
 	UnversionedClient rest.Interface
 	K8sClient         kubernetes.Interface
 
-	Apps     appsv1beta2.Interface
-	Workload workloadv1.Interface
-	Core     corev1.Interface
+	Apps       appsv1beta2.Interface
+	Workload   workloadv1.Interface
+	Core       corev1.Interface
+	RBAC       rbacv1.Interface
+	Extensions extv1beta1.Interface
 }
 
 func (w *WorkloadContext) controllers() []controller.Starter {
